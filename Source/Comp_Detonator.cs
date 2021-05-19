@@ -53,10 +53,21 @@ namespace TimeBombs
                 {
                     var explosive = this.parent.TryGetComp<CompExplosive>();
                     if (explosive != null && !explosive.wickStarted)
-                        explosive.StartWick(thing);
+                        {
+                            explosive.StartWick(thing);
+                            return;
+                        }
                     var explosiveCE = this.parent.TryGetComp<CompExplosiveCE>();
                     if (explosiveCE != null)
+                    {
                         explosiveCE.Explode(this.parent, this.parent.Position.ToVector3(), this.parent.Map);
+                        return;
+                    }
+                    if (this.parent.GetType()==typeof(AmmoThing))
+                    {
+                        DamageInfo damage = new DamageInfo(DamageDefOf.Burn, 10f);
+                        this.parent.TakeDamage(damage);
+                    }
                 }
         }
 

@@ -38,7 +38,8 @@ namespace TimeBombs
 			{
 				bool isExplosive = t.TryGetComp<CompExplosive>() != null;
 				bool isCEExplosive = t.TryGetComp<CompExplosiveCE>() != null;
-				return isExplosive || isCEExplosive;
+				bool isAmmo = thing.GetType()==typeof(AmmoThing);
+				return isExplosive || isCEExplosive || isAmmo;
 			}
 			return false;
 		}
