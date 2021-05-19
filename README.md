@@ -8,7 +8,7 @@ This is Rimworld game mod which allows to make a time bomb from any explosive by
 
 * __Cook in field__. You don't need a workbench to make a time bomb from explosive. Combine part.A and part.B and it's done.
 
-* __Stealth__. Operating with detonator wil not trigger any sleeping enemy.
+* __Stealth__. Operating with detonator will not trigger any sleeping enemy.
 
-`Where is detonator!`
+*Where is detonator!*
  
