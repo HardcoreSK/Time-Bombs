@@ -65,7 +65,9 @@ namespace TimeBombs
                     }
                     if (this.parent.GetType()==typeof(AmmoThing))
                     {
-                        DamageInfo damage = new DamageInfo(DamageDefOf.Burn, 10f);
+                        this.parent.HitPoints = this.parent.MaxHitPoints;
+                        DamageInfo damage = new DamageInfo(DamageDefOf.Burn, (float)(this.parent.MaxHitPoints - 1));
+                        FullClearSlot();
                         this.parent.TakeDamage(damage);
                     }
                 }
@@ -91,9 +93,7 @@ namespace TimeBombs
 
         public void DoArm()
         {
-            if (isArmed || definedDelayInMinutes == 0)
-                DoExplode(this.parent);
-            else
+            if (!isArmed)
             {
                 armedTick = Find.TickManager.TicksGame;
                 ticksUntilExplode = TicksInHour * definedDelayInMinutes / 60;
