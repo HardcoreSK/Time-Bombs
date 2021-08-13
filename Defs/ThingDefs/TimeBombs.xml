@@ -46,7 +46,7 @@
       </li>
       <li Class="CompProperties_Targetable">
         <compClass>TimeBombs.CompTargetable_Explosive</compClass>
-        <moteConnecting>Mote_PsycastPsychicLine</moteConnecting>
+        <fleckConnecting>PsycastPsychicLine</fleckConnecting>
       </li>
       <li Class="TimeBombs.CompProperties_TimerSettings">
         <compClass>TimeBombs.CompTargetEffect_AddDetonator</compClass>
@@ -103,7 +103,7 @@
       </li>
       <li Class="CompProperties_Targetable">
         <compClass>TimeBombs.CompTargetable_Explosive</compClass>
-        <moteConnecting>Mote_PsycastPsychicLine</moteConnecting>
+        <fleckConnecting>PsycastPsychicLine</fleckConnecting>
       </li>
       <li Class="TimeBombs.CompProperties_TimerSettings">
         <compClass>TimeBombs.CompTargetEffect_AddDetonator</compClass>
