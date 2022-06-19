@@ -50,28 +50,29 @@ namespace TimeBombs
         private void DoExplode(Thing thing = null)
         {
             if (ValidExplosive)
-                {
-                    var explosive = this.parent.TryGetComp<CompExplosive>();
-                    if (explosive != null && !explosive.wickStarted)
-                        {
-                            explosive.StartWick(thing);
-                            return;
-                        }
-                    var explosiveCE = this.parent.TryGetComp<CompExplosiveCE>();
-                    if (explosiveCE != null)
+            {
+                var explosive = this.parent.TryGetComp<CompExplosive>();
+                if (explosive != null && !explosive.wickStarted)
                     {
-                        explosiveCE.Explode(this.parent, this.parent.Position.ToVector3(), this.parent.Map);
-                        this.parent.Destroy();
+                        explosive.StartWick(thing);
                         return;
                     }
-                    if (this.parent.GetType()==typeof(AmmoThing))
-                    {
-                        this.parent.HitPoints = this.parent.MaxHitPoints;
-                        DamageInfo damage = new DamageInfo(DamageDefOf.Burn, (float)(this.parent.MaxHitPoints - 1));
-                        FullClearSlot();
-                        this.parent.TakeDamage(damage);
-                    }
+                var explosiveCE = this.parent.TryGetComp<CompExplosiveCE>();
+                if (explosiveCE != null)
+                {
+                    var scaleFactor = Mathf.Pow(this.parent.stackCount, 0.333f);
+                    explosiveCE.Explode(this.parent, this.parent.Position.ToVector3(), this.parent.Map, scaleFactor);
+                    this.parent.Destroy();
+                    return;
                 }
+                if (this.parent.GetType()==typeof(AmmoThing))
+                {
+                    this.parent.HitPoints = this.parent.MaxHitPoints;
+                    DamageInfo damage = new DamageInfo(DamageDefOf.Burn, (float)(this.parent.MaxHitPoints - 1));
+                    FullClearSlot();
+                    this.parent.TakeDamage(damage);
+                }
+            }
         }
 
         private void DecreaseDelay()
