@@ -61,6 +61,7 @@ namespace TimeBombs
                     if (explosiveCE != null)
                     {
                         explosiveCE.Explode(this.parent, this.parent.Position.ToVector3(), this.parent.Map);
+                        this.parent.Destroy();
                         return;
                     }
                     if (this.parent.GetType()==typeof(AmmoThing))
