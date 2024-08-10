@@ -1,4 +1,4 @@
-﻿using Verse;
+using Verse;
 
 namespace TimeBombs
 {
@@ -16,12 +16,12 @@ namespace TimeBombs
 
     public class Comp_BombTimer : ThingComp
     {
-		public CompProperties_TimerSettings Props
-		{
-			get
-			{
-				return (CompProperties_TimerSettings)this.props;
-			}
-		}
+        public CompProperties_TimerSettings Props
+        {
+            get
+            {
+                return (CompProperties_TimerSettings)this.props;
+            }
+        }
     }
 }

@@ -1,10 +1,10 @@
-﻿using Verse;
-using RimWorld;
-using System;
-using System.Text;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Text;
 using CombatExtended;
+using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace TimeBombs
 {
@@ -38,7 +38,7 @@ namespace TimeBombs
                 return this.unveiled.HasValue && this.unveiled.Value;
             }
         }
-        
+
         public bool ValidExplosive
         {
             get
@@ -53,10 +53,10 @@ namespace TimeBombs
             {
                 var explosive = this.parent.TryGetComp<CompExplosive>();
                 if (explosive != null && !explosive.wickStarted)
-                    {
-                        explosive.StartWick(thing);
-                        return;
-                    }
+                {
+                    explosive.StartWick(thing);
+                    return;
+                }
                 var explosiveCE = this.parent.TryGetComp<CompExplosiveCE>();
                 if (explosiveCE != null)
                 {
@@ -65,7 +65,7 @@ namespace TimeBombs
                     this.parent.Destroy();
                     return;
                 }
-                if (this.parent.GetType()==typeof(AmmoThing))
+                if (this.parent.GetType() == typeof(AmmoThing))
                 {
                     this.parent.HitPoints = this.parent.MaxHitPoints;
                     DamageInfo damage = new DamageInfo(DamageDefOf.Burn, (float)(this.parent.MaxHitPoints - 1));
@@ -117,11 +117,11 @@ namespace TimeBombs
             if (this.allowRemoteArming)
                 DoArm();
             else
-                { 
-                    wantsToBeDisarmed = false;
-                    wantsToBeArmed = true;
-                    TB_Utils.UpdateArmingDesignation(this.parent);
-                }
+            {
+                wantsToBeDisarmed = false;
+                wantsToBeArmed = true;
+                TB_Utils.UpdateArmingDesignation(this.parent);
+            }
         }
 
         public void TryDisarm()
@@ -129,11 +129,11 @@ namespace TimeBombs
             if (this.allowRemoteArming)
                 DoDisarm();
             else
-                {
-                    wantsToBeArmed = false;
-                    wantsToBeDisarmed = true;
-                    TB_Utils.UpdateArmingDesignation(this.parent);
-                }
+            {
+                wantsToBeArmed = false;
+                wantsToBeDisarmed = true;
+                TB_Utils.UpdateArmingDesignation(this.parent);
+            }
         }
 
         public void ResetAnyActions()
@@ -184,8 +184,8 @@ namespace TimeBombs
                         if (ticksUntilExplode < 0)
                             DoExplode(this.parent);
                     }
-                }   
-            }   
+                }
+            }
         }
 
         public override bool AllowStackWith(Thing other)
@@ -195,19 +195,19 @@ namespace TimeBombs
                 return false;
             bool sameSlotState = this.IsInstalledDetonator == otherDetonator.IsInstalledDetonator;
             if (!sameSlotState)
-                {
-                    return false;
-                }
+            {
+                return false;
+            }
             bool sameRemoteAiming = this.allowRemoteArming == otherDetonator.allowRemoteArming;
             if (this.IsInstalledDetonator && !sameRemoteAiming)
-                {
-                    return false;
-                }
+            {
+                return false;
+            }
             bool sameArmedState = this.isArmed == otherDetonator.isArmed;
             if (this.IsInstalledDetonator && sameRemoteAiming && !sameArmedState)
-                {
-                    return false;
-                }
+            {
+                return false;
+            }
             return true;
         }
 
@@ -225,22 +225,22 @@ namespace TimeBombs
         }
 
         public override void PreAbsorbStack(Thing otherStack, int count)
-        { 
-             var otherDetonator = otherStack.GetDetonator();
-                if (otherDetonator!= null && !this.IsInstalledDetonator && otherDetonator.IsInstalledDetonator)
-                {
-                    this.armingDelay = otherDetonator.armingDelay;
-                    this.disarmingDelay = otherDetonator.disarmingDelay;
-                    this.allowRemoteArming = otherDetonator.allowRemoteArming;
-                    this.unveiled = otherDetonator.unveiled;
-                }
+        {
+            var otherDetonator = otherStack.GetDetonator();
+            if (otherDetonator != null && !this.IsInstalledDetonator && otherDetonator.IsInstalledDetonator)
+            {
+                this.armingDelay = otherDetonator.armingDelay;
+                this.disarmingDelay = otherDetonator.disarmingDelay;
+                this.allowRemoteArming = otherDetonator.allowRemoteArming;
+                this.unveiled = otherDetonator.unveiled;
+            }
         }
 
         public override void PostDraw()
         {
             if (IsInstalledDetonator && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
             {
-                Vector3 vector = this.parent.OccupiedRect().BottomLeft.ToVector3();
+                Vector3 vector = this.parent.OccupiedDrawRect().CenterVector3;
                 vector.z += 0.3f;
                 vector.x += 0.2f;
                 Graphics.DrawMesh(MeshPool.plane10, vector, Quaternion.identity, OverlayContainer.DetonatorMat, 0);
@@ -252,10 +252,10 @@ namespace TimeBombs
             if (IsInstalledDetonator && ValidExplosive)
             {
                 var builder = new StringBuilder();
-                var armedStr = isArmed 
+                var armedStr = isArmed
                                 ? "TB_BombTimerArmed".Translate()
                                 : "TB_BombTimerDisarmed".Translate();
-                builder.AppendInNewLine(this.allowRemoteArming 
+                builder.AppendInNewLine(this.allowRemoteArming
                                             ? "TB_ExplosiveWithRadioTimer".Translate(armedStr)
                                             : "TB_ExplosiveWithTimer".Translate(armedStr));
                 builder.AppendInNewLine("TB_TimerSetTo".Translate(definedDelayInMinutes));
@@ -268,8 +268,8 @@ namespace TimeBombs
                 if (isArmed && this.parent.GetComp<CompExplosive>() != null && this.parent.GetComp<CompExplosive>().wickStarted)
                     builder.AppendInNewLine("TB_Detonating".Translate());
                 return builder.ToString();
-            } 
-            return string.Empty;  
+            }
+            return string.Empty;
         }
 
         public override string TransformLabel(string label)
@@ -280,9 +280,9 @@ namespace TimeBombs
             }
             return label;
         }
-        
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
-		{ 
+        {
             if (IsInstalledDetonator && ValidExplosive && (!this.parent.def.CanHaveFaction || this.parent.Faction == Faction.OfPlayer))
             {
                 //Arm Action
@@ -336,6 +336,6 @@ namespace TimeBombs
                     yield return ResetActions;
                 }
             }
-		}
+        }
     }
 }

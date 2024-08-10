@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net48</TargetFramework>
 		<PlatformTarget>x64</PlatformTarget>
 
 		<!-- Modify [RootNamespace], [AssemblyName], [OutputPath], [VersionPrefix] -->
 		<RootNamespace>TimeBombs</RootNamespace>
 		<AssemblyName>TimeBombs</AssemblyName>
-		<OutputPath>../Assemblies</OutputPath>
+		<Product>TimeBombs</Product>
+		<OutputPath>..\..\Assemblies\</OutputPath>
 		<VersionPrefix>1.0.0.0</VersionPrefix>
 
 		<!-- do not generate pdb file -->
@@ -17,23 +18,20 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	</PropertyGroup>
 
- 	<ItemGroup>
-	 	<!-- Mod -->
-	 	<Compile Include="../Source/*" />
-		
-	 	<!-- Rimworld -->
-	 	<Reference Include="../../_Assemblies_13/*.dll">
-			<Private>False</Private>
-		</Reference>
+	<ItemGroup>
+		<!-- Mod -->
+		<Compile Include="../Source/*" />
 
-		<!-- Harmony -->
-		<Reference Include="../../_Assemblies_Mods/0Harmony.dll">
-			<Private>False</Private>
+		<!-- Rimworld -->
+		<Reference Include="Core_SK">
+			<HintPath>..\..\Assemblies\Core_SK.dll</HintPath>
 		</Reference>
-
-		<Reference Include="../../_Assemblies_Mods/CombatExtended.dll">
-			<Private>False</Private>
+		<Reference Include="CombatExtended">
+			<HintPath>../../Assemblies/CombatExtended.dll</HintPath>
 		</Reference>
-
+		<PackageReference Include="Lib.Harmony" Version="2.3.3" ExcludeAssets="runtime" />
+		<PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.*" />
+		<PackageReference Include="Krafs.Publicizer" Version="2.2.1" />
 	</ItemGroup>
+	<Import Project="Properties/OutputPath.props" Condition="Exists('Properties/OutputPath.props')" />
 </Project>

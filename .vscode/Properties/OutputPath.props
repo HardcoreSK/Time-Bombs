@@ -1,0 +1,10 @@
+﻿<Project>
+	<PropertyGroup>
+		<PostBuildEvent>
+			echo copying output file at $(MSBuildProjectDirectory)\$(OutputPath)$(Product).dll to D:\SteamLibrary\steamapps\common\RimWorld\Mods\GCC_TimeBombs\Assemblies
+			xcopy "$(MSBuildProjectDirectory)\$(OutputPath)$(Product).dll" "D:\SteamLibrary\steamapps\common\RimWorld\Mods\GCC_TimeBombs\Assemblies" /R /Y
+			<!-- echo copying output file at $(MSBuildProjectDirectory)\$(OutputPath)$(TargetName) to $(MSBuildProjectDirectory)\$(OutputPath)\..\Assemblies\
+			xcopy "$(MSBuildProjectDirectory)\$(OutputPath)$(TargetName)" "$(MSBuildProjectDirectory)\$(OutputPath)..\..\Assemblies\" /R /Y -->
+		</PostBuildEvent>
+	</PropertyGroup>
+</Project>

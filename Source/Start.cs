@@ -1,7 +1,7 @@
-﻿using Verse;
 using System.Linq;
-using RimWorld;
 using CombatExtended;
+using RimWorld;
+using Verse;
 
 namespace TimeBombs
 {
@@ -11,7 +11,7 @@ namespace TimeBombs
         static Start()
         {
             Log.Message("Time bombs loaded successfully!");
-            var explosiveDefs = DefDatabase<ThingDef>.AllDefs.Where(def =>  !def.comps.NullOrEmpty()
+            var explosiveDefs = DefDatabase<ThingDef>.AllDefs.Where(def => !def.comps.NullOrEmpty()
                                                                             && (def.HasComp(typeof(CompExplosive))
                                                                             || def.HasComp(typeof(CompExplosiveCE))
                                                                             || def.thingClass == typeof(AmmoThing))).ToList();

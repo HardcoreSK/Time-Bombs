@@ -1,6 +1,6 @@
-﻿using Verse;
 using RimWorld;
 using UnityEngine;
+using Verse;
 
 namespace TimeBombs
 {
@@ -8,9 +8,9 @@ namespace TimeBombs
     public static class TB_LocalDefOf
     {
         static TB_LocalDefOf()
-		{
-			DefOfHelper.EnsureInitializedInCtor(typeof(TB_LocalDefOf));
-		}
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(TB_LocalDefOf));
+        }
 
         public static DesignationDef OperateBombTimerDes;
         public static WorkGiverDef OperateBombTimer;
