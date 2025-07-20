@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using CombatExtended;
@@ -240,7 +240,7 @@ namespace TimeBombs
         {
             if (IsInstalledDetonator && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
             {
-                Vector3 vector = this.parent.OccupiedDrawRect().CenterVector3;
+                Vector3 vector = this.parent.OccupiedRect().CenterVector3;
                 vector.z += 0.3f;
                 vector.x += 0.2f;
                 Graphics.DrawMesh(MeshPool.plane10, vector, Quaternion.identity, OverlayContainer.DetonatorMat, 0);

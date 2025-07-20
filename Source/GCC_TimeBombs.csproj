@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RuntimeIdentifiers>win;linux</RuntimeIdentifiers>
+    <LangVersion>preview</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Version>1.6</Version>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <AssemblyName>TimeBombs</AssemblyName>
+    <Copyright>Copyright ©  2024</Copyright>
+    <Deterministic>true</Deterministic>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'"> -->
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Publicizer" Version="2.*" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*" />
+    <PackageReference Include="Lib.Harmony" Version="2.3.*" ExcludeAssets="runtime" />
+    <Reference Include="CombatExtended">
+      <HintPath>..\..\CombatExtended\Assemblies\CombatExtended.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
